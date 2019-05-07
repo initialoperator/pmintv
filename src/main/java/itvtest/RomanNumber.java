@@ -35,6 +35,14 @@ public class RomanNumber {
     }
 
     private static String convertSingleDigit(int digit, int pos, char[] units){
+        StringBuilder sb = new StringBuilder("");
+        if(pos == 3){//just learned that roman numbers handles thousand and above differently
+            while (digit > 0){
+                sb.append(units[2 * pos]);
+                digit--;
+            }
+            return sb.toString();
+        }
         if(digit == 0)
             return "";
         if(digit == 4){
@@ -47,7 +55,8 @@ public class RomanNumber {
             char primaryUnit = units[2 * pos+2];
             return ""+secondaryUnit+primaryUnit;
         }
-        StringBuilder sb = new StringBuilder("");
+
+
         int primaryMultiply = digit /5 ;
         int secondaryMultiply = digit % 5;
         char secondaryUnit = units[2 * pos];
